@@ -1,11 +1,28 @@
 // script.js
 let currentIndex = 0;
 
+function updateCarousel() {
+    const images = document.querySelectorAll('.carousel-images img');
+    const indicators = document.querySelectorAll('.indicator');
+
+    // Update active image
+    images.forEach((img, index) => {
+        img.classList.toggle('active', index === currentIndex);
+    });
+
+    // Update active indicator
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentIndex);
+    });
+}
+
 function changeSlide(direction) {
     const images = document.querySelectorAll('.carousel-images img');
-    images[currentIndex].classList.remove('active');
-
     currentIndex = (currentIndex + direction + images.length) % images.length;
+    updateCarousel();
+}
 
-    images[currentIndex].classList.add('active');
+function goToSlide(index) {
+    currentIndex = index;
+    updateCarousel();
 }
